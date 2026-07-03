@@ -1,0 +1,227 @@
+/* =========================================================
+   DESIGN TOKENS — Tema: Elegan & Floral
+   Palet terinspirasi dari undangan arch-garden bernuansa wine/maroon
+   ========================================================= */
+:root {
+  /* Warna */
+  --maroon-deep: #4a1420;   /* latar gelap utama */
+  --maroon-mid: #7a2638;    /* gradasi kartu gelap */
+  --wine-line: #9a3b4d;     /* garis / border di atas gelap */
+  --rose-dust: #d99aa3;     /* aksen lembut */
+  --gold: #bf9a5e;          /* aksen emas utama */
+  --gold-light: #e8d9b5;    /* emas terang / teks di atas gelap */
+  --ivory: #f8f1e4;         /* latar terang kartu */
+  --ivory-2: #f1e6d3;       /* latar terang sekunder */
+  --ink: #3a1f22;           /* teks utama di atas terang */
+  --ink-soft: #6b4a4f;      /* teks sekunder */
+
+  /* Tipografi */
+  --font-display: 'Playfair Display', 'Georgia', serif;
+  --font-script: 'Alex Brush', cursive;
+  --font-body: 'EB Garamond', 'Georgia', serif;
+  --font-label: 'Cormorant Garamond', 'Georgia', serif;
+
+  --radius-card: 6px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--maroon-deep);
+  color: var(--ink);
+  font-family: var(--font-body);
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+#app {
+  max-width: 520px;
+  margin: 0 auto;
+  min-height: 100vh;
+  position: relative;
+  background: var(--maroon-deep);
+  box-shadow: 0 0 60px rgba(0,0,0,0.6);
+}
+
+img { max-width: 100%; display: block; }
+
+/* Fokus keyboard terlihat jelas (aksesibilitas) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =========================================================
+   UTIL — Section umum
+   ========================================================= */
+.section {
+  position: relative;
+  padding: 72px 28px;
+}
+
+.section--dark {
+  background: linear-gradient(180deg, var(--maroon-deep), var(--maroon-mid));
+  color: var(--ivory);
+}
+
+.section--light {
+  background: var(--ivory);
+  color: var(--ink);
+}
+
+.eyebrow {
+  font-family: var(--font-label);
+  font-size: 15px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--gold);
+  margin: 0 0 10px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 30px;
+  text-align: center;
+  margin: 0 0 6px;
+}
+
+.section--dark .section-title { color: var(--ivory); }
+.section--light .section-title { color: var(--maroon-mid); }
+
+/* Garis pemisah dekoratif kecil */
+.divider {
+  width: 64px;
+  height: 1px;
+  margin: 20px auto;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  position: relative;
+}
+.divider::before {
+  content: '❧';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+  font-size: 16px;
+  color: var(--gold);
+  background: inherit;
+}
+
+/* =========================================================
+   ARCH FRAME — motif gerbang lengkung, elemen signature halaman
+   ========================================================= */
+.arch-frame {
+  position: relative;
+  border: 1px solid var(--gold);
+  border-radius: 160px 160px 8px 8px;
+  padding: 46px 26px 30px;
+  background: rgba(248, 241, 228, 0.03);
+}
+.arch-frame::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(191, 154, 94, 0.5);
+  border-radius: 150px 150px 4px 4px;
+  pointer-events: none;
+}
+
+/* =========================================================
+   FLORAL ORNAMENTS — sudut bunga digambar via SVG inline per komponen,
+   kelas ini hanya mengatur posisi
+   ========================================================= */
+.corner-ornament {
+  position: absolute;
+  width: 84px;
+  height: 84px;
+  opacity: 0.9;
+  pointer-events: none;
+}
+.corner-ornament--tl { top: 6px; left: 6px; }
+.corner-ornament--tr { top: 6px; right: 6px; transform: scaleX(-1); }
+.corner-ornament--bl { bottom: 6px; left: 6px; transform: scaleY(-1); }
+.corner-ornament--br { bottom: 6px; right: 6px; transform: scale(-1, -1); }
+
+/* =========================================================
+   PETALS — animasi kelopak jatuh perlahan
+   ========================================================= */
+.petals {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.petal {
+  position: absolute;
+  top: -5%;
+  animation: fall linear infinite;
+  opacity: 0.85;
+}
+@keyframes fall {
+  0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.85; }
+  100% { transform: translateY(110vh) translateX(24px) rotate(220deg); opacity: 0; }
+}
+
+/* =========================================================
+   BUTTON — tombol emas bergaya undangan
+   ========================================================= */
+.btn-gold {
+  display: inline-block;
+  font-family: var(--font-label);
+  font-size: 17px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--maroon-deep);
+  background: linear-gradient(180deg, var(--gold-light), var(--gold));
+  border: none;
+  padding: 13px 34px;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(0,0,0,0.3); }
+
+.btn-outline {
+  display: inline-block;
+  font-family: var(--font-label);
+  font-size: 15px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  background: transparent;
+  border: 1px solid var(--gold);
+  padding: 10px 22px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.btn-outline:hover { background: var(--gold); color: var(--maroon-deep); }
+
+/* Fade-up saat elemen muncul di scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
