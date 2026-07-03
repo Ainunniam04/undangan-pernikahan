@@ -7,7 +7,7 @@
 export default {
   // Ditampilkan di tab browser & meta description
   seo: {
-    title: 'The Wedding Of — Rita & Niam',
+    title: ' The Wedding Of — Rita & Niam ',
     description: 'Undangan pernikahan digital Rita & Niam',
   },
 
