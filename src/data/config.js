@@ -56,8 +56,8 @@ export default {
 
   venue: {
     name: 'Rumah Mempelai Wanita Rita Auliya',
-    address: 'Jl. Soekarno Hatta No. 354, Kec. Bojongloa Kidel, Kota Bandung',
-    mapsUrl: 'https://maps.google.com/?q=Bandung+Convention+Center',
+    address: '6V8H+9FP, Unnamed Road, Ngelo, Karangbener, Kec. Bae, Kabupaten Kudus, Jawa Tengah 59323',
+    mapsUrl: 'https://maps.app.goo.gl/cBTEZ4pwjzT7miwe9',
   },
 
   // Galeri foto — ganti dengan foto pasangan (taruh file di folder /public/images/)
