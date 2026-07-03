@@ -6,5 +6,5 @@ import vue from '@vitejs/plugin-vue'
 // Contoh: kalau repo-nya "undangan-asri-fikri", maka base = '/undangan-asri-fikri/'
 export default defineConfig({
   plugins: [vue()],
-  base: '/nama-repo-kamu/',
+  base: '/undangan-pernikahan/',
 })
